@@ -1,6 +1,6 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        """
+        
         ret = []
         dic = {}
         for num in nums:
@@ -15,8 +15,8 @@ class Solution:
             ret.append(dic_list[i][0])
         
         return ret
-        """
         
+        """
         ret = []
         dic = [[] for i in range(len(nums) + 1)]
         count = {}
@@ -31,3 +31,4 @@ class Solution:
                 ret.append(n)
                 if(len(ret) == k):
                     return ret
+        """
