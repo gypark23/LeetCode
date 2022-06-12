@@ -6,7 +6,7 @@ class Solution:
             if(i > 0 and nums[i - 1] == nums[i]):
                 continue
             for j in range(i + 1, len(nums) - 2):
-                if(j != i + 1 and nums[j - 1] == nums[j]):
+                if(j > i + 1 and nums[j - 1] == nums[j]):
                     continue
                 targ = target - nums[i] - nums[j]
                 low, high = j + 1, len(nums) - 1
