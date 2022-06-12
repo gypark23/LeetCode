@@ -3,7 +3,7 @@ class Solution:
         low = 0
         
         for high in range(1, len(nums)):
-            if(nums[high] == nums[low]):
+            if(nums[high] == nums[high - 1]):
                 continue
             low += 1
             nums[low] = nums[high]
