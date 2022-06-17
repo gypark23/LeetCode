@@ -5,6 +5,7 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """iterative
         curr = head
         prev = None
         
@@ -15,4 +16,15 @@ class Solution:
             curr = _next
         
         return prev
+        """
+        """recursive"""
+        
+        def reverse(previous, curr):
+            if(not curr):
+                return previous
             
+            next_temp = curr.next
+            curr.next = previous
+            return reverse(curr, next_temp)
+        
+        return reverse(None, head)
