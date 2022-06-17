@@ -11,7 +11,6 @@ class Solution:
         
         while(low <= high):
             mid = (low + high) // 2
-            print(low, mid, high)
             if(isBadVersion(mid) != isBadVersion(mid + 1)):
                 return mid + 1
             if(isBadVersion(mid - 1) != isBadVersion(mid)):
@@ -21,6 +20,5 @@ class Solution:
             else:
                 low = mid + 1
                 
-        #f t t
         return -1
             
