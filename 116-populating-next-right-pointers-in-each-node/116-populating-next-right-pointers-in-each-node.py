@@ -14,18 +14,14 @@ class Solution:
         if(not root):
             return None
         
-        queue = deque()
-        queue.append(root)
-        curr = root
+        leftmost = root
+        while(leftmost.left):
+            head = leftmost
+            while(head):
+                head.left.next = head.right
+                if(head.next):
+                    head.right.next = head.next.left
+                head = head.next
+            leftmost = leftmost.left
         
-        while(queue):
-            size = len(queue)
-            for i in range(size):
-                curr = queue.popleft()
-                if(i != size - 1):
-                    curr.next = queue[0]
-                if(curr.left):
-                    queue.append(curr.left)
-                if(curr.right):
-                    queue.append(curr.right)
         return root
