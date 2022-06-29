@@ -14,17 +14,20 @@ class Solution:
             return None
         
         curr = root
-        prev = Node(0)
-        while(curr):
-            if(curr.left):
-                prev.next = curr.left
-                prev = curr.left
-            if(curr.right):
-                prev.next = curr.right
-                prev = curr.right
-            curr = curr.next
-        prev.next = None
+        head = root
+        dummy = Node(0)
+        while(head):
+            curr = head
+            prev = dummy
+            while(curr):
+                if(curr.left):
+                    prev.next = curr.left
+                    prev = curr.left
+                if(curr.right):
+                    prev.next = curr.right
+                    prev = curr.right
+                curr = curr.next
+            head = dummy.next
+            dummy.next = None
         
-        root.left = self.connect(root.left)
-        root.right = self.connect(root.right)
         return root
