@@ -7,13 +7,13 @@
 
 class Solution:
     def inorderSuccessor(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
-        ret = None
+        l = []
         
-        while(root):
-            if root.val > p.val:
-                ret = root
-                root = root.left
-            else:
-                root = root.right
+        def travel(r):
+            if not r:
+                return []
+            return travel(r.left) + [r] + travel(r.right)
         
-        return ret
+        l = travel(root)
+        idx = l.index(p)
+        return l[idx + 1] if idx is not len(l) - 1 else None
