@@ -5,23 +5,24 @@
 #         self.left = left
 #         self.right = right
 class BSTIterator:
-
+    
     def __init__(self, root: Optional[TreeNode]):
-        self.idx = 0
-        def travel(r):
-            if not r:
-                return []
-            
-            return travel(r.left) + [r.val] + travel(r.right)
-        self.l = travel(root)
+        self.l = []
+        self.fillLeft(root)
 
-    def next(self) -> int:
-        self.idx += 1
-        return self.l[self.idx - 1]
+    def fillLeft(self, r):
+        while r:
+            self.l.append(r)
+            r = r.left
         
-
+        
+    def next(self) -> int:
+        ret = self.l.pop()
+        self.fillLeft(ret.right)
+        return ret.val
+    
     def hasNext(self) -> bool:
-        return self.idx < len(self.l)
+        return len(self.l) > 0
 
 
 # Your BSTIterator object will be instantiated and called as such:
