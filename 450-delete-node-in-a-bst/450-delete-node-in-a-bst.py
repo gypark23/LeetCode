@@ -19,29 +19,19 @@ class Solution:
         else:
             #case 1, no child
             if not root.left and not root.right:
-                root = None
-            #case 3, has two children
-            elif root.left and root.right:
-                #find leftest in root.right
-                temp_pre = root
+                return None
+            #case 2, one child
+            elif not (root.left and root.right):
+                #return whatever child that is not null
+                return root.left if root.left else root.right
+            #case 3, two children
+            else:
                 temp = root.right
                 while(temp.left):
-                    temp_pre = temp
                     temp = temp.left
-                #if temp has a child (temp.right), link that to temp_pre.right or left
-                if(temp.right):
-                    if(temp.right.val < temp_pre.val):
-                        temp_pre.left = temp.right
-                    else:
-                        temp_pre.right = temp.right
-                #put temp to root
                 root.val = temp.val
-                root.left = self.deleteNode(root.left, root.val)
                 root.right = self.deleteNode(root.right, root.val)
-            #case 2, has one child
-            else:
-                root = root.left if root.left else root.right
-        
+                
         return root
                 
                 
