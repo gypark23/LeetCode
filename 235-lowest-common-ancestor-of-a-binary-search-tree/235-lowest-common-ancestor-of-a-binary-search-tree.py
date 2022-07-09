@@ -11,12 +11,9 @@ class Solution:
         if not root:
             return None
         
-        pval, qval = p.val, q.val
-        
-        if min(pval, qval) <= root.val and max(pval, qval) >= root.val:
-            return root
-        
-        if min(pval, qval) <= root.val:
+        if root.val > p.val and root.val > q.val:
             return self.lowestCommonAncestor(root.left, p, q)
-        else:
+        elif root.val < p.val and root.val < q.val:
             return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
