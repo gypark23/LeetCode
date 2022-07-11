@@ -1,15 +1,28 @@
 class Solution:
     def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        def binarySearch(i):
+            low, high = 0, len(mat[i])
+            while low < high:
+                mid = (low + high) // 2
+                if mat[i][mid] == 1:
+                    low = mid + 1
+                else:
+                    high = mid
+            return low
+            
         heap = []
-        ret = []
         for i, row in enumerate(mat):
-            idx = 0
-            while idx < len(row) and row[idx] == 1:
-                idx += 1
-            heap.append(idx + i / 1000)
+            item = (-binarySearch(i), -i)
+            print(item)
+            heappush(heap, item)
+            while(len(heap) > k):
+                heappop(heap)
         
-        heapify(heap)
-        while k:
-            ret.append(round(heappop(heap) % 1 * 1000))
-            k -= 1
-        return ret
+        ret = []
+        print(heap)
+        while heap:
+            a, b = heappop(heap)
+            ret.append(-b)
+            
+        return ret[::-1]
+            
