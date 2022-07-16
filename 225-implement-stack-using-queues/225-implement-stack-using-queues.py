@@ -3,22 +3,26 @@ class MyStack:
 
     def __init__(self):
         self.first = deque()
-        #self.second = deque()
-
+        self.second = deque()
+        self._top = None
+        
     def push(self, x: int) -> None:
         self.first.append(x)
-        for _ in range(len(self.first) - 1):
-            self.first.append(self.first.popleft())
+        self._top = x
 
     def pop(self) -> int:
-        return self.first.popleft()
+        while len(self.first) > 1:
+            self._top = self.first.popleft()
+            self.second.append(self._top)
         
+        self.first, self.second = self.second, self.first
+        return self.second.popleft()
 
     def top(self) -> int:
-        return self.first[0]
+        return self._top
 
     def empty(self) -> bool:
-        return not self.first
+        return not self.first and not self.second
 
 
 # Your MyStack object will be instantiated and called as such:
