@@ -6,7 +6,7 @@ class Solution:
         queue.append(0)
         visited.add(0)
         while queue:
-            room = queue.popleft()
+            room = queue.pop()
             for key in rooms[room]:
                 if key not in visited:
                     queue.append(key)
