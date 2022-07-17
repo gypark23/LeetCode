@@ -13,8 +13,6 @@ class Solution:
                 dic_reverse[prereq[1]].append(prereq[0])
             else:
                 dic_reverse[prereq[1]] = [prereq[0]]
-        print(dic)
-        print(dic_reverse)
         visited = set()        
         for i in range(numCourses):
             if i not in dic:
