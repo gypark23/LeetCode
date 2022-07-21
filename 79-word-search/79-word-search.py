@@ -1,36 +1,44 @@
-class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
-        row, col = len(board), len(board[0])
-        
-        def dfs(r, c, w, visited):
-            if not w:
-                return True
-            
-            if board[r][c] != w[0]:
-                return False
-            
-            if len(w) == 1:
-                return True
-            
-            directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-            w = w[1:]
-            for x, y in directions:
-                new_r, new_c = r + x, c + y
-                if new_r in range(row) and new_c in range(col) and (new_r, new_c) not in visited:
-                    visited.add((new_r, new_c))
-                    if dfs(new_r, new_c, w, visited):
-                        return True
-                    else:
-                        visited.remove((new_r, new_c))
-            
-            return False
-        
-        for i in range(row):
-            for j in range(col):
-                visited = set()
-                visited.add((i, j))
-                if dfs(i, j, word, visited):
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        self.ROWS = len(board)
+        self.COLS = len(board[0])
+        self.board = board
+
+        for row in range(self.ROWS):
+            for col in range(self.COLS):
+                if self.backtrack(row, col, word):
                     return True
-        
+
+        # no match found after all exploration
         return False
-            
+
+
+    def backtrack(self, row, col, suffix):
+        # bottom case: we find match for each letter in the word
+        if len(suffix) == 0:
+            return True
+
+        # Check the current status, before jumping into backtracking
+        if row < 0 or row == self.ROWS or col < 0 or col == self.COLS \
+                or self.board[row][col] != suffix[0]:
+            return False
+
+        ret = False
+        # mark the choice before exploring further.
+        self.board[row][col] = '#'
+        # explore the 4 neighbor directions
+        for rowOffset, colOffset in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            ret = self.backtrack(row + rowOffset, col + colOffset, suffix[1:])
+            # break instead of return directly to do some cleanup afterwards
+            if ret: break
+
+        # revert the change, a clean slate and no side-effect
+        self.board[row][col] = suffix[0]
+
+        # Tried all directions, and did not find any match
+        return ret
