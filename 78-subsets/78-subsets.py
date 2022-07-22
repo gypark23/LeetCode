@@ -6,6 +6,7 @@ class Solution:
             if i == len(nums):
                 ret.append(path)
                 return
+            
             path.append(nums[i])
             dfs(i + 1, path[:])
             path.pop()
