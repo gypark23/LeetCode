@@ -1,17 +1,16 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        ret = [[]]
+        ret = []
         
-        def backtrack(i, path):
+        def dfs(i, path):
             if i == len(nums):
+                ret.append(path)
                 return
-            
             path.append(nums[i])
-            ret.append(path)
-            
-            for j in range(i, len(nums)):
-                backtrack(j + 1, path[:])
+            dfs(i + 1, path[:])
+            path.pop()
+            dfs(i + 1, path[:])
         
-        for i in range(len(nums)):
-            backtrack(i, [])
+        dfs(0, [])
         return ret
+            
