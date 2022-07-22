@@ -21,3 +21,21 @@ class Solution:
             for c in range(COLS):
                 if dfs(r, c, 0): return True
         return False
+    
+    # O(n * m * 4^n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
